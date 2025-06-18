@@ -1,0 +1,118 @@
+/* THEME VARIABLES */
+:root {
+    --bg: #f9f9f9;
+    --text: #1a1a1a;
+    --card: #ffffff;
+    --button: #2563eb;
+    --accent: #00bfa6;
+    --input-bg: #ffffff;
+    --input-border: #ccc;
+    --heading: #2563eb;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --text: #ffffff;
+    --card: #1e1e1e;
+    --button: #00bfa6;
+    --accent: #00ffcc;
+    --input-bg: #2a2a2a;
+    --input-border: #555;
+    --heading: #00ffcc;
+}
+
+/* GENERAL RESET */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+/* CONTAINER */
+.container {
+    background-color: var(--card);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    max-width: 700px;
+    margin: auto;
+}
+
+/* HEADINGS */
+h2, h3, h4 {
+    color: var(--heading);
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form-label {
+    font-weight: 600;
+}
+
+input.form-control {
+    background-color: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--input-border);
+}
+
+input.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+/* BUTTONS */
+.btn-success {
+    background-color: var(--button);
+    border: none;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: darken(var(--button), 10%);
+}
+
+.btn-secondary {
+    background-color: #333;
+    border: none;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #444;
+}
+
+/* THEME TOGGLE BUTTON (injected inline style for now) */
+.theme-toggle {
+    background-color: var(--button);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: bold;
+}
+
+.theme-toggle:hover {
+    opacity: 0.9;
+}
+
+/* LINKS */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* FOOTER / NAME */
+footer, .footer-text {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+}

@@ -1,11 +1,193 @@
 <!DOCTYPE html>
-<html>
-<head><title>Investment Tools</title></head>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EasyFinCalc - Financial Calculators</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS (if any external file like style.css) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Internal CSS -->
+  <style>
+    :root {
+      --bg-light: #f2f4f8;
+      --text-light: #333;
+      --card-light: #ffffff;
+      --button-light: #2563eb;
+
+      --bg-dark: #121212;
+      --text-dark: #e0e0e0;
+      --card-dark: #1e1e1e;
+      --button-dark: #4f9ef7;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --card: var(--card-light);
+      --button: var(--button-light);
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --card: var(--card-dark);
+      --button: var(--button-dark);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    .toggle-switch {
+      cursor: pointer;
+      padding: 8px 16px;
+      border: none;
+      background-color: var(--button);
+      color: #fff;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-top: 20px;
+    }
+
+    p.tagline {
+      font-size: 1.2em;
+      color: var(--text);
+    }
+
+    .welcome-note {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: var(--text);
+    }
+
+    .author-name {
+      margin-top: 5px;
+      font-size: 1em;
+      font-weight: 600;
+      color: var(--button);
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: var(--card);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 300px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      font-size: 1.5em;
+      color: var(--button);
+    }
+
+    .card p {
+      font-size: 0.95em;
+      margin: 15px 0;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      background-color: var(--button);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
 <body>
-  <h1>Welcome to the Financial Calculators</h1>
-  <ul>
-    <li><a href="/retirement">Retirement Calculator</a></li>
-    <li><a href="/investment">Investment Calculator</a></li>
-  </ul>
+  <header>
+    <img src="static/logo.png" alt="EasyFinCalc Logo" />
+    <button class="toggle-switch" onclick="toggleTheme()">Switch Theme</button>
+  </header>
+
+  <div class="container">
+    <h1>Welcome to EasyFinCalc</h1>
+    <p class="tagline">Smart, Simple & Powerful Financial Calculators</p>
+
+    <p class="welcome-note">
+      Empowering you to make better financial decisions with easy-to-use tools for retirement and investment planning.
+    </p>
+    <p class="author-name">– Akhil Ponna</p>
+
+    <div class="cards">
+      <div class="card">
+        <h2>Retirement Calculator</h2>
+        <p>Plan how much you need to save monthly to retire comfortably based on your target corpus and age.</p>
+        <a href="/retirement">Try Now</a>
+      </div>
+
+      <div class="card">
+        <h2>Investment Calculator</h2>
+        <p>Calculate your future investment value based on SIP, lumpsum or step-up contributions.</p>
+        <a href="/investment">Try Now</a>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 EasyFinCalc | All Rights Reserved
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
+    }
+  </script>
 </body>
 </html>

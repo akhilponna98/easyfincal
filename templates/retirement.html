@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retirement Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Retirement Calculator</h1>
+    <form method="POST">
+        <label>Monthly Expense (₹):</label>
+        <input type="number" name="monthly_expense" step="any" required>
+
+        <label>Current Age:</label>
+        <input type="number" name="current_age" required>
+
+        <label>Retirement Age:</label>
+        <input type="number" name="retirement_age" required>
+
+        <label>Life Expectancy:</label>
+        <input type="number" name="life_expectancy" required>
+
+        <label>Inflation Rate (e.g. 0.06 for 6%):</label>
+        <input type="number" name="inflation_rate" step="any" required>
+
+        <label>Expected Return Rate (e.g. 0.12 for 12%):</label>
+        <input type="number" name="expected_return_rate" step="any" required>
+
+        <label>Annual SIP Step-Up Rate (e.g. 0.10 for 10%):</label>
+        <input type="number" name="step_up_rate" step="any" required>
+
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <h3>Required Retirement Corpus:</h3>
+            <p><strong>₹{{ '{:,.0f}'.format(result) }}</strong></p>
+        </div>
+    {% endif %}
+
+    <div class="back-link">
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

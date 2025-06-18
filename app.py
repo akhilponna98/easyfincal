@@ -18,7 +18,6 @@ def retirement():
         life_expectancy = int(request.form["life_expectancy"])
         inflation_rate = float(request.form["inflation_rate"])
         expected_return_rate = float(request.form["expected_return_rate"])
-        step_up_rate = float(request.form["step_up_rate"])
 
         years_to_retirement = retirement_age - current_age
         years_after_retirement = life_expectancy - retirement_age

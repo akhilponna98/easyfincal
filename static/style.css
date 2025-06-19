@@ -34,16 +34,16 @@ body {
 .container {
     background-color: var(--card);
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    max-width: 900px;
     margin: auto;
 }
 
 /* HEADINGS */
-h2, h3, h4 {
+h1, h2, h3, h4 {
     color: var(--heading);
-    margin-bottom: 20px;
+    font-weight: 700;
 }
 
 /* FORM */
@@ -65,14 +65,16 @@ input.form-control:focus {
 }
 
 /* BUTTONS */
-.btn-success {
+.btn-success, .btn-try {
     background-color: var(--button);
     border: none;
     color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
 }
 
-.btn-success:hover {
-    background-color: darken(var(--button), 10%);
+.btn-success:hover, .btn-try:hover {
+    filter: brightness(90%);
 }
 
 .btn-secondary {
@@ -85,7 +87,7 @@ input.form-control:focus {
     background-color: #444;
 }
 
-/* THEME TOGGLE BUTTON (injected inline style for now) */
+/* THEME TOGGLE BUTTON */
 .theme-toggle {
     background-color: var(--button);
     color: #fff;
@@ -93,6 +95,8 @@ input.form-control:focus {
     border-radius: 6px;
     padding: 8px 12px;
     font-weight: bold;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
 }
 
 .theme-toggle:hover {
@@ -109,10 +113,97 @@ a:hover {
     text-decoration: underline;
 }
 
-/* FOOTER / NAME */
+/* FOOTER */
 footer, .footer-text {
-    margin-top: 40px;
+    margin-top: 50px;
     text-align: center;
     font-size: 0.9em;
     color: #888;
+}
+
+/* CARD SECTION */
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.card {
+    width: 300px;
+    background-color: var(--card);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    margin-top: 10px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+}
+
+.card i {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    color: var(--button);
+}
+
+/* ARTICLE SECTION */
+.articles-section {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 15px;
+}
+
+.articles-section h2 {
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.article {
+    background: var(--card);
+    padding: 18px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.article h5 {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.article p {
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+
+    .card-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .articles-section {
+        padding: 0 10px;
+    }
 }

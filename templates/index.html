@@ -3,191 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EasyFinCal - Financial Calculators</title>
+  <title>EasyFinCal | Smart Financial Calculators</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Custom CSS (if any external file like style.css) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-  <!-- Internal CSS -->
   <style>
-    :root {
-      --bg-light: #f2f4f8;
-      --text-light: #333;
-      --card-light: #ffffff;
-      --button-light: #2563eb;
-
-      --bg-dark: #121212;
-      --text-dark: #e0e0e0;
-      --card-dark: #1e1e1e;
-      --button-dark: #4f9ef7;
+    :root[data-theme='light'] {
+      --bg: #f5f7fa;
+      --text: #111;
+      --card: #ffffff;
+      --button: #0d6efd;
     }
 
-    [data-theme="light"] {
-      --bg: var(--bg-light);
-      --text: var(--text-light);
-      --card: var(--card-light);
-      --button: var(--button-light);
-    }
-
-    [data-theme="dark"] {
-      --bg: var(--bg-dark);
-      --text: var(--text-dark);
-      --card: var(--card-dark);
-      --button: var(--button-dark);
+    :root[data-theme='dark'] {
+      --bg: #121212;
+      --text: #fff;
+      --card: #1f1f1f;
+      --button: #00bfa6;
     }
 
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    header {
+    .navbar {
+      background-color: var(--card);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-brand {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: var(--text);
     }
 
-    header img {
-      height: 40px;
+    .navbar-brand img {
+      height: 38px;
     }
 
-    .toggle-switch {
-      cursor: pointer;
-      padding: 8px 16px;
+    .theme-toggle {
       border: none;
       background-color: var(--button);
-      color: #fff;
-      border-radius: 5px;
-      font-weight: bold;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 1rem;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
+    .welcome {
+      max-width: 850px;
+      margin: 60px auto 40px;
       text-align: center;
-      padding: 20px;
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
+    .welcome h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
     }
 
-    p.tagline {
-      font-size: 1.2em;
-      color: var(--text);
-    }
-
-    .welcome-note {
+    .welcome p {
+      font-size: 1.05rem;
       margin-top: 10px;
-      font-size: 1.1em;
-      color: var(--text);
     }
 
-    .author-name {
-      margin-top: 5px;
-      font-size: 1em;
-      font-weight: 600;
-      color: var(--button);
-    }
-
-    .cards {
+    .card-group {
       display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
       flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 50px;
     }
 
     .card {
-      background-color: var(--card);
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       width: 300px;
+      background-color: var(--card);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
     }
 
-    .card h2 {
-      font-size: 1.5em;
-      color: var(--button);
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
 
     .card p {
-      font-size: 0.95em;
-      margin: 15px 0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
     }
 
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 18px;
+    .card i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: var(--button);
+    }
+
+    .btn-try {
       background-color: var(--button);
       color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background-color 0.3s;
+      font-weight: 500;
     }
 
-    footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #888;
+    .articles-section {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 15px;
+    }
+
+    .articles-section h2 {
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .article {
+      background: var(--card);
+      padding: 18px 20px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .article h5 {
+      margin-bottom: 6px;
+    }
+
+    .footer {
       text-align: center;
+      padding: 30px 10px 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .welcome h1 {
+        font-size: 2rem;
+      }
+      .card {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="static/logo.png" alt="EasyFinCalc Logo" />
-    <button class="toggle-switch" onclick="toggleTheme()">Switch Theme</button>
-  </header>
 
-  <div class="container">
+  <!-- Navbar -->
+  <nav class="navbar px-4 py-3">
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="EasyFinCal Logo" />
+      EasyFinCal
+    </a>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section class="welcome">
     <h1>Welcome to EasyFinCal</h1>
-    <p class="tagline">Smart, Simple & Powerful Financial Calculators</p>
+    <p class="fs-5">Smart, Simple & Powerful Financial Calculators</p>
+    <p class="text-muted">Empowering you to make better financial decisions with easy-to-use tools for retirement and investment planning.</p>
+    <p><strong>— Akhil Ponna</strong></p>
+  </section>
 
-    <p class="welcome-note">
-      Empowering you to make better financial decisions with easy-to-use tools for retirement and investment planning.
-    </p>
-    <p class="author-name">– Akhil Ponna</p>
-
-    <div class="cards">
+  <!-- Calculator Cards -->
+  <div class="container">
+    <div class="card-group">
       <div class="card">
-        <h2>Retirement Calculator</h2>
-        <p>Plan how much you need to save monthly to retire comfortably based on your target corpus and age.</p>
-        <a href="/retirement">Try Now</a>
+        <i class="bi bi-piggy-bank-fill"></i>
+        <h3>Retirement Calculator</h3>
+        <p>Plan your retirement corpus based on your lifestyle expenses, inflation, and returns.</p>
+        <a href="/retirement" class="btn btn-try w-100">Try Now</a>
       </div>
-
       <div class="card">
-        <h2>Investment Calculator</h2>
-        <p>Calculate your future investment value based on SIP, lumpsum or step-up contributions.</p>
-        <a href="/investment">Try Now</a>
+        <i class="bi bi-graph-up-arrow"></i>
+        <h3>Investment Calculator</h3>
+        <p>Estimate your future wealth with SIP, step-up options, and expected return rate.</p>
+        <a href="/investment" class="btn btn-try w-100">Try Now</a>
       </div>
     </div>
-
-    <footer>
-      © 2025 EasyFinCal | All Rights Reserved
-    </footer>
   </div>
 
+  <!-- Articles Section -->
+  <div class="articles-section mb-5">
+    <h2 class="text-center">📘 Financial Tips & Articles</h2>
+    <div class="article">
+      <h5>🔹 How much should you invest monthly for retirement?</h5>
+      <p>Understand your future needs and back-calculate your monthly SIP using inflation-adjusted projections.</p>
+    </div>
+    <div class="article">
+      <h5>🔹 Why a Step-up SIP Strategy Works Better in the Long Run</h5>
+      <p>Learn how increasing your SIP every year can significantly improve your corpus using compounding benefits.</p>
+    </div>
+    <div class="article">
+      <h5>🔹 Retirement Planning for Beginners</h5>
+      <p>Start small, stay consistent. Know the basics of how to plan retirement from your 20s and 30s.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2025 EasyFinCal. All rights reserved.
+  </div>
+
+  <!-- Theme Toggle Script -->
   <script>
     function toggleTheme() {
       const html = document.documentElement;
       const currentTheme = html.getAttribute("data-theme");
-      html.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      html.setAttribute("data-theme", newTheme);
+      document.querySelector('.theme-toggle').textContent = newTheme === "light" ? "🌙" : "☀️";
     }
   </script>
+
 </body>
 </html>

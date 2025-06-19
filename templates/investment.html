@@ -48,30 +48,34 @@
             <form method="post">
                 <div class="mb-3">
                     <label for="monthly_investment" class="form-label">Monthly SIP (₹):</label>
-                    <input type="number" class="form-control" name="monthly_investment" required>
+                    <input type="number" class="form-control" name="monthly_investment" required
+                        value="{{ form_data.monthly_investment if form_data }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="expected_return" class="form-label">Expected Annual Return (e.g. 0.12 for 12%):</label>
-                    <input type="number" step="0.01" class="form-control" name="expected_return" required>
+                    <input type="number" step="0.01" class="form-control" name="expected_return" required
+                        value="{{ form_data.expected_return if form_data }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="investment_period" class="form-label">Investment Period (in years):</label>
-                    <input type="number" class="form-control" name="investment_period" required>
+                    <input type="number" class="form-control" name="investment_period" required
+                        value="{{ form_data.investment_period if form_data }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="step_up_rate" class="form-label">Annual Step-Up Rate (e.g. 0.10 for 10%):</label>
-                    <input type="number" step="0.01" class="form-control" name="step_up_rate" required>
+                    <input type="number" step="0.01" class="form-control" name="step_up_rate" required
+                        value="{{ form_data.step_up_rate if form_data }}">
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">📈 Calculate</button>
             </form>
 
-            {% if result %}
+            {% if formatted_result %}
             <hr>
-            <h4 class="text-center mt-3">📈 Future Value: ₹{{ "{:,.0f}".format(result) }}</h4>
+            <h4 class="text-center mt-3">📈 Future Value: {{ formatted_result }}</h4>
             {% endif %}
         </div>
 

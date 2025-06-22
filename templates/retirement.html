@@ -6,112 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .card {
-            border-radius: 12px;
-            background-color: var(--card);
-            color: var(--text);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        .theme-toggle {
-            background-color: var(--button);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-weight: bold;
-        }
-
-        .theme-toggle:hover {
-            opacity: 0.9;
-        }
-
-        .footer-text {
-            color: var(--text);
-        }
-    </style>
 </head>
-<body id="body">
+<body>
 
-    <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>🧓 Retirement Corpus Calculator</h2>
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        </div>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🧓 Retirement Corpus Calculator</h2>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
 
-        <div class="card p-4">
+    <!-- Summary -->
+    <div class="alert alert-info mb-4">
+        <strong>💡 How it Works:</strong><br>
+        This calculator uses the <b>4% Rule</b>—you can withdraw 4% of your retirement corpus annually to sustain your lifestyle.<br>
+        It adjusts for inflation and life expectancy to estimate your required corpus.
+    </div>
 
-            <!-- 💡 Summary Section -->
-            <div class="alert alert-info mb-4">
-                <strong>💡 How it Works:</strong><br>
-                This calculator uses the <b>4% Rule</b>, a common rule of thumb that suggests you can safely withdraw 4% of your retirement corpus annually without running out of money.<br><br>
-                The <b>Expected Return Rate</b> helps estimate how much your corpus needs to grow annually after retirement to keep up with inflation and withdrawals.
+    <div class="row g-4">
+        <!-- Left: Form -->
+        <div class="col-md-6">
+            <div class="card p-4">
+                <form method="POST">
+                    {% set fields = [
+                        ("monthly_expense", "Monthly Expense (₹)", 5000, 200000, 1000),
+                        ("current_age", "Current Age", 20, 60, 1),
+                        ("retirement_age", "Retirement Age", 40, 70, 1),
+                        ("life_expectancy", "Life Expectancy", 60, 100, 1),
+                        ("inflation_rate", "Inflation Rate (%)", 1, 10, 0.1),
+                        ("expected_return_rate", "Expected Return Rate (%)", 4, 15, 0.1)
+                    ] %}
+                    
+                    {% for name, label, min_, max_, step in fields %}
+                    <div class="mb-3">
+                        <label for="{{ name }}" class="form-label">{{ label }}</label>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="range" class="form-range" id="{{ name }}" name="{{ name }}"
+                                   min="{{ min_ }}" max="{{ max_ }}" step="{{ step }}"
+                                   value="{{ form_data.get(name, 40 if 'age' in name else 6 if 'inflation' in name else 40000 if name == 'monthly_expense' else 10) }}">
+                            <input type="number" class="form-control form-control-sm" style="width: 100px;"
+                                   id="{{ name }}_box" min="{{ min_ }}" max="{{ max_ }}" step="{{ step }}"
+                                   value="{{ form_data.get(name, 40 if 'age' in name else 6 if 'inflation' in name else 40000 if name == 'monthly_expense' else 10) }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-success w-100">📌 Calculate</button>
+                </form>
             </div>
-
-            <!-- 🧮 Calculator Form -->
-            <form method="POST">
-                <div class="mb-3">
-                    <label class="form-label">Monthly Expense (₹):</label>
-                    <input type="number" name="monthly_expense" class="form-control" step="any" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Current Age:</label>
-                    <input type="number" name="current_age" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Retirement Age:</label>
-                    <input type="number" name="retirement_age" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Life Expectancy:</label>
-                    <input type="number" name="life_expectancy" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Inflation Rate (e.g. 0.06 for 6%):</label>
-                    <input type="number" name="inflation_rate" class="form-control" step="any" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Expected Return Rate (e.g. 0.12 for 12%):</label>
-                    <input type="number" name="expected_return_rate" class="form-control" step="any" required>
-                </div>
-
-                <button type="submit" class="btn btn-success w-100">📌 Calculate</button>
-            </form>
-
-            {% if result %}
-                <div class="alert alert-success text-center mt-4">
-                    <h4>📌 Required Retirement Corpus:</h4>
-                    <h5>₹{{ '{:,.0f}'.format(result) }}</h5>
-                </div>
-            {% endif %}
         </div>
 
-        <div class="mt-4 d-flex justify-content-between align-items-center">
-            <a href="/" class="btn btn-outline-secondary">⬅️ Back to Home</a>
-            <span class="footer-text">Created by Akhil Ponna</span>
+        <!-- Right: Result -->
+        <div class="col-md-6">
+            <div class="card p-4 text-center">
+                {% if result %}
+                <h5>🧮 Required Corpus:</h5>
+                <p class="fs-4 text-primary">
+                    ₹{{ '{:,.0f}'.format(result) }} <br>
+                    <span class="text-muted">({{ formatted_result }})</span>
+                </p>
+                {% else %}
+                <p class="text-muted">Fill the form to calculate your retirement corpus.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const button = document.querySelector('.theme-toggle');
-            const currentTheme = html.getAttribute("data-theme");
-            const newTheme = currentTheme === "light" ? "dark" : "light";
-            html.setAttribute("data-theme", newTheme);
-            button.textContent = newTheme === "dark" ? "☀️" : "🌙";
-        }
-    </script>
+    <div class="mt-4 d-flex justify-content-between align-items-center">
+        <a href="/" class="btn btn-outline-secondary">⬅️ Back to Home</a>
+        <span class="footer-text">Created by Akhil Ponna</span>
+    </div>
+</div>
 
+<!-- JS -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+    const fields = [
+        'monthly_expense', 'current_age', 'retirement_age',
+        'life_expectancy', 'inflation_rate', 'expected_return_rate'
+    ];
+    fields.forEach(id => {
+        const slider = document.getElementById(id);
+        const box = document.getElementById(id + '_box');
+
+        slider.addEventListener('input', () => box.value = slider.value);
+        box.addEventListener('input', () => slider.value = box.value);
+    });
+</script>
 </body>
 </html>

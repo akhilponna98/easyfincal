@@ -26,7 +26,6 @@ body {
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px;
     transition: all 0.3s ease;
 }
 
@@ -44,6 +43,32 @@ body {
 h1, h2, h3, h4 {
     color: var(--heading);
     font-weight: 700;
+}
+
+/* WELCOME SECTION */
+.welcome {
+    max-width: 900px;
+    margin: 60px auto 40px;
+    text-align: center;
+}
+
+.welcome h1 {
+    font-weight: 700;
+    font-size: 2.6rem;
+    color: var(--heading);
+}
+
+.welcome p.quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    margin-top: 15px;
+}
+
+.welcome p.signature {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 /* FORM */
@@ -174,22 +199,24 @@ footer, .footer-text {
     text-align: center;
 }
 
-.article {
-    background: var(--card);
-    padding: 18px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.article h5 {
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.article p {
-    font-size: 0.95rem;
+/* ACCORDION CUSTOMIZATION */
+.accordion-button {
+    background-color: var(--card);
     color: var(--text);
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.accordion-body {
+    background-color: var(--card);
+    color: var(--text);
+    padding: 18px;
+    border-top: 1px solid var(--input-border);
 }
 
 /* RESPONSIVE */

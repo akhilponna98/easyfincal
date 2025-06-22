@@ -1,99 +1,124 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <title>Investment Calculator | EasyFinCalc</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .card {
-            border-radius: 12px;
-            background-color: var(--card);
-            color: var(--text);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        .theme-toggle {
-            background-color: var(--button);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-weight: bold;
-        }
-
-        .theme-toggle:hover {
-            opacity: 0.9;
-        }
-
-        .footer-text {
-            color: var(--text);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Investment Calculator | EasyFinCalc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body id="body">
+<body>
 
-    <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>📊 Investment Growth Calculator</h2>
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        </div>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📊 Investment Growth Calculator</h2>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 
-        <div class="card p-4">
-            <form method="post">
-                <div class="mb-3">
-                    <label for="monthly_investment" class="form-label">Monthly SIP (₹):</label>
-                    <input type="number" class="form-control" name="monthly_investment" required
-                        value="{{ form_data.monthly_investment if form_data }}">
-                </div>
+  <!-- Summary -->
+  <div class="alert alert-info mb-4">
+    <strong>💡 What This Does:</strong><br>
+    This calculator estimates how your monthly investments grow over time using compounding.<br><br>
+    It considers:
+    <ul class="mb-0">
+      <li>Expected return (annual %)</li>
+      <li>Number of years you plan to invest</li>
+      <li>Step-up SIP (yearly increase in monthly investment)</li>
+    </ul>
+  </div>
 
-                <div class="mb-3">
-                    <label for="expected_return" class="form-label">Expected Annual Return (e.g. 0.12 for 12%):</label>
-                    <input type="number" step="0.01" class="form-control" name="expected_return" required
-                        value="{{ form_data.expected_return if form_data }}">
-                </div>
+  <div class="row g-4">
+    <!-- Left: Form -->
+    <div class="col-md-6">
+      <div class="card p-4">
+        <form method="POST">
 
-                <div class="mb-3">
-                    <label for="investment_period" class="form-label">Investment Period (in years):</label>
-                    <input type="number" class="form-control" name="investment_period" required
-                        value="{{ form_data.investment_period if form_data }}">
-                </div>
+          {% set values = form_data if form_data else {} %}
 
-                <div class="mb-3">
-                    <label for="step_up_rate" class="form-label">Annual Step-Up Rate (e.g. 0.10 for 10%):</label>
-                    <input type="number" step="0.01" class="form-control" name="step_up_rate" required
-                        value="{{ form_data.step_up_rate if form_data }}">
-                </div>
+          {% macro slider_input(label, id, min, max, step, suffix, prefix) %}
+          <div class="mb-3">
+            <label for="{{ id }}" class="form-label">{{ label }}:</label>
+            <div class="d-flex align-items-center gap-2">
+              <input type="range" class="form-range flex-grow-1" min="{{ min }}" max="{{ max }}" step="{{ step }}"
+                     id="{{ id }}" name="{{ id }}" value="{{ values.get(id, '') }}">
+              <input type="number" class="form-control" style="max-width: 100px;" 
+                     id="{{ id }}_input" min="{{ min }}" max="{{ max }}" step="{{ step }}">
+            </div>
+          </div>
+          {% endmacro %}
 
-                <button type="submit" class="btn btn-success w-100">📈 Calculate</button>
-            </form>
+          {{ slider_input('Monthly SIP (₹)', 'monthly_investment', 1000, 100000, 1000, '', '₹') }}
+          {{ slider_input('Expected Annual Return (%)', 'expected_return', 1, 20, 0.5, '%', '') }}
+          {{ slider_input('Investment Period (Years)', 'investment_period', 1, 40, 1, ' yrs', '') }}
+          {{ slider_input('Annual Step-Up Rate (%)', 'step_up_rate', 0, 50, 1, '%', '') }}
 
-            {% if formatted_result %}
-            <hr>
-            <h4 class="text-center mt-3">📈 Future Value: {{ formatted_result }}</h4>
-            {% endif %}
-        </div>
-
-        <div class="mt-4 d-flex justify-content-between align-items-center">
-            <a href="/" class="btn btn-outline-secondary">⬅️ Back to Home</a>
-            <span class="footer-text">Created by Akhil Ponna</span>
-        </div>
+          <button type="submit" class="btn btn-success w-100 mt-3">📈 Calculate</button>
+        </form>
+      </div>
     </div>
 
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const button = document.querySelector('.theme-toggle');
-            const currentTheme = html.getAttribute("data-theme");
-            const newTheme = currentTheme === "light" ? "dark" : "light";
-            html.setAttribute("data-theme", newTheme);
-            button.textContent = newTheme === "dark" ? "☀️" : "🌙";
-        }
-    </script>
+    <!-- Right: Output -->
+    <div class="col-md-6">
+      <div class="card p-4 text-center">
+        {% if result %}
+        <h5>Invested Amount:</h5>
+        <p class="text-success fw-bold">{{ formatted_invested }}</p>
+
+        <h5>Estimated Returns:</h5>
+        <p class="text-warning fw-bold">{{ formatted_returns }}</p>
+
+        <h5>Total Future Value:</h5>
+        <p class="fs-4">
+          ₹{{ '{:,.0f}'.format(result) }} <br>
+          <span class="text-muted">({{ formatted_result }})</span>
+        </p>
+
+        <canvas id="sipChart" height="200"></canvas>
+        <script>
+          window.addEventListener('DOMContentLoaded', () => {
+            renderDonutChart({{ invested_amount }}, {{ estimated_returns }});
+          });
+        </script>
+        {% else %}
+        <p class="text-muted">Enter values and click Calculate to see result.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-between align-items-center">
+    <a href="/" class="btn btn-outline-secondary">⬅️ Back to Home</a>
+    <span class="footer-text">Created by Akhil Ponna</span>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+  const syncSliderInput = (id) => {
+    const slider = document.getElementById(id);
+    const input = document.getElementById(id + "_input");
+
+    // Initial sync
+    input.value = slider.value;
+
+    slider.addEventListener("input", () => {
+      input.value = slider.value;
+    });
+
+    input.addEventListener("input", () => {
+      slider.value = input.value;
+    });
+  };
+
+  [
+    'monthly_investment',
+    'expected_return',
+    'investment_period',
+    'step_up_rate'
+  ].forEach(syncSliderInput);
+</script>
+
 </body>
 </html>

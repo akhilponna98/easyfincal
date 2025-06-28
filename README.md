@@ -50,7 +50,7 @@ retirement_calculator/
 ```bash
 python -m venv venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass  # (Windows)
-.env\Scriptsctivate
+.\venv\Scripts\Activate
 ```
 
 ### ✅ 2. Install Flask & Dependencies

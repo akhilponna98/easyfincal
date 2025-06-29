@@ -126,6 +126,10 @@ web: gunicorn app:app
 
 ---
 
+🌐 Live Website
+🔗 EasyFinCal → https://www.easyfincal.com
+Your all-in-one platform for free, simple financial calculators to plan SIPs, retirement, and wealth goals.
+
 ## 📜 License
 
 MIT License — Free to use, improve, and share!

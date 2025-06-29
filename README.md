@@ -1,36 +1,25 @@
 🧮 EasyFinCal – Smart Financial Calculators
 EasyFinCal is a modern, web-based suite of financial calculators designed to help users plan investments and retirement with ease. Built with Flask, Bootstrap, and Chart.js, it’s mobile-friendly, fast, and visually engaging.
-
 🚀 Live Demo
-Website: https://easyfincal.com
-
+•	Website: https://easyfincal.com
 ✨ Features
-SIP Calculator:
+•	SIP Calculator:
 Calculate the future value of monthly investments (SIP) with annual step-up support and visual breakdown.
-
-Retirement Calculator:
+•	Retirement Calculator:
 Estimate the retirement corpus you’ll need, factoring in inflation, life expectancy, and expected returns (uses the 4% rule).
-
-Retirement SIP Planner:
+•	Retirement SIP Planner:
 Find out how much you need to invest monthly (with step-up) to reach your retirement goal.
-
-Target SIP Calculator:
+•	Target SIP Calculator:
 Calculate the required SIP to reach a specific financial goal in a set time frame.
-
-Dark/Light Mode:
+•	Dark/Light Mode:
 Toggleable theme with user preference saved.
-
-Responsive Design:
+•	Responsive Design:
 Works beautifully on desktop and mobile.
-
-Visual Charts:
+•	Visual Charts:
 Donut charts for investment breakdowns (powered by Chart.js).
-
-SEO & Accessibility:
+•	SEO & Accessibility:
 Optimized for search engines and accessible for all users.
-
 🗂️ Folder Structure
-text
 EasyFinCal/
 ├── app.py                  # Flask backend: routes, calculator logic
 ├── templates/
@@ -44,6 +33,7 @@ EasyFinCal/
 │   ├── script.js           # Shared JS: charts, sliders, theme, interactivity
 │   └── logo.png            # (If applicable) Site logo
 └── requirements.txt        # Python dependencies (Flask, etc.)
+
 File/Folder Descriptions
 File/Folder	Purpose
 app.py	Main Flask application. Handles all routes, form submissions, and calculator logic.
@@ -57,65 +47,47 @@ static/	Static assets (CSS, JS, images, etc).
 style.css	Global custom styles: layout, dark mode, cards, forms, responsiveness.
 script.js	JavaScript for charts (Chart.js), slider syncing, theme toggle, and interactivity.
 requirements.txt	Python dependencies (Flask, gunicorn, etc.) for running the app locally or on deployment.
+
 🛠️ Getting Started
 1. Clone the Repository
-bash
 git clone https://github.com/yourusername/easyfincal.git
 cd easyfincal
+
 2. Set Up a Virtual Environment
-bash
 python -m venv venv
 source venv/bin/activate      # On Windows: venv\Scripts\activate
+
 3. Install Dependencies
-bash
 pip install -r requirements.txt
+
 4. Run the App Locally
-bash
 python app.py
+
 Visit http://localhost:5000 in your browser.
-
 🌐 Deployment
-Free Hosting: Render.com (recommended)
-
-Steps:
-
-Connect your GitHub repo
-
-Set build command: pip install -r requirements.txt
-
-Set start command: python app.py
-
-Add custom domain if needed
-
+•	Free Hosting: Render.com (recommended)
+•	Steps:
+o	Connect your GitHub repo
+o	Set build command: pip install -r requirements.txt
+o	Set start command: python app.py
+o	Add custom domain if needed
 🤝 Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss your ideas.
-
-Use feature branches (feature/your-feature-name)
-
-Follow PEP8 for Python and standard HTML/CSS/JS best practices
-
-Keep code and documentation clean and readable
-
+•	Use feature branches (feature/your-feature-name)
+•	Follow PEP8 for Python and standard HTML/CSS/JS best practices
+•	Keep code and documentation clean and readable
 📄 License
 This project is licensed under the MIT License.
-
 🙏 Credits
-Bootstrap
-
-Chart.js
-
-Flask
-
-Built and maintained by Akhil Ponna
-
+•	Bootstrap
+•	Chart.js
+•	Flask
+•	Built and maintained by Akhil Ponna
 📬 Contact
-Email: your.email@example.com
-
-LinkedIn (add your link)
-
-GitHub
-
+•	Email: your.email@example.com
+•	LinkedIn (add your link)
+•	GitHub
 Happy Planning! 🚀
-
 “Growing wealth is a long-term game. With patience, discipline, and consistent effort, anyone can build it.”
 — Akhil Ponna
+You can personalize the contact info, add more calculators, or update deployment instructions as your project grows!

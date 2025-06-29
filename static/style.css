@@ -1,236 +1,232 @@
-/* THEME VARIABLES */
-:root {
-    --bg: #f9f9f9;
-    --text: #1a1a1a;
-    --card: #ffffff;
-    --button: #2563eb;
-    --accent: #00bfa6;
-    --input-bg: #ffffff;
-    --input-border: #ccc;
-    --heading: #2563eb;
+/* === Variables === */
+:root[data-theme='light'] {
+  --bg: #f5f7fa;
+  --text: #111;
+  --card: #ffffff;
+  --button: #0d6efd;
+  --shadow: rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="dark"] {
-    --bg: #121212;
-    --text: #ffffff;
-    --card: #1e1e1e;
-    --button: #00bfa6;
-    --accent: #00ffcc;
-    --input-bg: #2a2a2a;
-    --input-border: #555;
-    --heading: #00ffcc;
+:root[data-theme='dark'] {
+  --bg: #121212;
+  --text: #fff;
+  --card: #1f1f1f;
+  --button: #00bfa6;
+  --shadow: rgba(255, 255, 255, 0.05);
 }
 
-/* GENERAL RESET */
+/* === Base === */
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: all 0.3s ease;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding-top: 70px; /* Space for sticky nav */
 }
 
-/* CONTAINER */
-.container {
-    background-color: var(--card);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    max-width: 900px;
-    margin: auto;
+/* === Navbar === */
+.navbar {
+  background-color: var(--card);
+  box-shadow: 0 2px 6px var(--shadow);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
 }
 
-/* HEADINGS */
-h1, h2, h3, h4 {
-    color: var(--heading);
-    font-weight: 700;
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: var(--text);
+  text-decoration: none;
 }
 
-/* WELCOME SECTION */
-.welcome {
-    max-width: 900px;
-    margin: 60px auto 40px;
-    text-align: center;
+.navbar-brand img {
+  height: 38px;
 }
 
-.welcome h1 {
-    font-weight: 700;
-    font-size: 2.6rem;
-    color: var(--heading);
+.navbar-nav .nav-link {
+  color: var(--text);
+  margin-left: 20px;
+  font-weight: 500;
 }
 
-.welcome p.quote {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--text);
-    margin-top: 15px;
+.navbar-nav .nav-link:hover {
+  color: var(--button);
 }
 
-.welcome p.signature {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 5px;
+.navbar-nav .nav-link.active {
+  color: var(--button);
+  border-bottom: 2px solid var(--button);
 }
 
-/* FORM */
-.form-label {
-    font-weight: 600;
-}
-
-input.form-control {
-    background-color: var(--input-bg);
-    color: var(--text);
-    border: 1px solid var(--input-border);
-}
-
-input.form-control:focus {
-    background-color: var(--input-bg);
-    color: var(--text);
-    border-color: var(--accent);
-    box-shadow: none;
-}
-
-/* BUTTONS */
-.btn-success, .btn-try {
-    background-color: var(--button);
-    border: none;
-    color: #fff;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.btn-success:hover, .btn-try:hover {
-    filter: brightness(90%);
-}
-
-.btn-secondary {
-    background-color: #333;
-    border: none;
-    color: #fff;
-}
-
-.btn-secondary:hover {
-    background-color: #444;
-}
-
-/* THEME TOGGLE BUTTON */
+/* === Theme Toggle === */
 .theme-toggle {
-    background-color: var(--button);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: opacity 0.3s ease;
+  border: none;
+  background-color: var(--button);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .theme-toggle:hover {
-    opacity: 0.9;
+  opacity: 0.85;
 }
 
-/* LINKS */
-a {
-    color: var(--accent);
-    text-decoration: none;
+/* === Welcome === */
+.welcome {
+  max-width: 960px;
+  margin: 40px auto;
+  text-align: center;
 }
 
-a:hover {
-    text-decoration: underline;
+.welcome h1 {
+  font-weight: 700;
+  font-size: 2.6rem;
 }
 
-/* FOOTER */
-footer, .footer-text {
-    margin-top: 50px;
-    text-align: center;
-    font-size: 0.9em;
-    color: #888;
+.welcome p.quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-top: 15px;
 }
 
-/* CARD SECTION */
-.card-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    margin-top: 40px;
+.welcome p.signature {
+  font-weight: bold;
+  margin-top: 5px;
 }
 
+/* === Cards === */
 .card {
-    width: 300px;
-    background-color: var(--card);
-    color: var(--text);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
+  background-color: var(--card);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 6px 20px var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-6px);
-}
-
-.card h3 {
-    font-size: 1.4rem;
-    margin-top: 10px;
-}
-
-.card p {
-    font-size: 0.95rem;
-    margin-bottom: 16px;
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 24px var(--shadow);
 }
 
 .card i {
-    font-size: 2.5rem;
-    margin-bottom: 12px;
-    color: var(--button);
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--button);
 }
 
-/* ARTICLE SECTION */
-.articles-section {
-    max-width: 900px;
-    margin: 60px auto;
-    padding: 0 15px;
+.card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
-.articles-section h2 {
-    font-weight: 600;
-    margin-bottom: 24px;
-    text-align: center;
+.card p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
 }
 
-/* ACCORDION CUSTOMIZATION */
+/* === Buttons === */
+.btn-try {
+  background-color: var(--button);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.btn-try:hover,
+.btn-try:focus {
+  filter: brightness(0.92);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* === Chart & Legend (Compact) === */
+.sip-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  width: 120px;
+  height: 120px;
+}
+@media (max-width: 768px) {
+  .sip-chart-container {
+    width: 90px;
+    height: 90px;
+  }
+}
+.sip-legend {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  margin-top: 4px;
+}
+.legend-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* === Accordion === */
 .accordion-button {
-    background-color: var(--card);
-    color: var(--text);
-    font-weight: 500;
-    font-size: 1.05rem;
+  background-color: var(--card);
+  color: var(--text);
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: var(--accent);
-    color: #fff;
+  color: var(--button);
+  background-color: var(--bg);
 }
 
 .accordion-body {
-    background-color: var(--card);
-    color: var(--text);
-    padding: 18px;
-    border-top: 1px solid var(--input-border);
+  background-color: var(--bg);
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-    .card {
-        width: 100%;
-    }
+/* === Footer === */
+.footer {
+  text-align: center;
+  padding: 30px 10px 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
 
-    .card-group {
-        flex-direction: column;
-        align-items: center;
-    }
+.footer a {
+  color: inherit;
+  text-decoration: underline;
+  margin: 0 6px;
+}
 
-    .articles-section {
-        padding: 0 10px;
-    }
+.footer a:hover {
+  color: var(--button);
+}
+
+/* === Accessibility: Focus Styles === */
+a:focus, button:focus, .btn-try:focus, .theme-toggle:focus {
+  outline: 2px solid var(--button);
+  outline-offset: 2px;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .navbar-nav .nav-link {
+    margin-left: 0;
+  }
+  .card {
+    margin-bottom: 20px;
+  }
 }

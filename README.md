@@ -1,179 +1,121 @@
-# 🧮 EasyFinCalc – Smart Financial Calculators
+🧮 EasyFinCal – Smart Financial Calculators
+EasyFinCal is a modern, web-based suite of financial calculators designed to help users plan investments and retirement with ease. Built with Flask, Bootstrap, and Chart.js, it’s mobile-friendly, fast, and visually engaging.
 
-## 📌 Project Overview
-**EasyFinCalc** is a lightweight, web-based financial tool designed to simplify essential investment planning. It provides:
+🚀 Live Demo
+Website: https://easyfincal.com
 
-- 📈 **SIP Calculator** – Visualize long-term investment growth with step-up SIP support.  
-- 👴 **Retirement Calculator** – Calculate how much you need to retire, adjusting for inflation and expenses.
+✨ Features
+SIP Calculator:
+Calculate the future value of monthly investments (SIP) with annual step-up support and visual breakdown.
 
----
+Retirement Calculator:
+Estimate the retirement corpus you’ll need, factoring in inflation, life expectancy, and expected returns (uses the 4% rule).
 
-## 🧰 Tech Stack & Tools
+Retirement SIP Planner:
+Find out how much you need to invest monthly (with step-up) to reach your retirement goal.
 
-| Tool/Service            | Purpose                                |
-|------------------------|----------------------------------------|
-| Flask (Python)         | Backend framework                      |
-| HTML, CSS, Bootstrap   | Frontend and responsive UI             |
-| JavaScript             | Interactive elements & dark mode       |
-| Git & GitHub           | Version control                        |
-| Render                 | Deployment platform (free tier used)   |
-| PowerShell             | Local terminal for development         |
-| VS Code                | Code editor                            |
-| Notion                 | Documentation                          |
-| Custom Domain          | Connected via Render + DNS             |
+Target SIP Calculator:
+Calculate the required SIP to reach a specific financial goal in a set time frame.
 
----
+Dark/Light Mode:
+Toggleable theme with user preference saved.
 
-## 🗂️ Folder Structure
+Responsive Design:
+Works beautifully on desktop and mobile.
 
-```
-retirement_calculator/
-├── static/
-│   ├── style.css              # Global styles
-│   └── script.js              # Theme toggle & calculator logic
+Visual Charts:
+Donut charts for investment breakdowns (powered by Chart.js).
+
+SEO & Accessibility:
+Optimized for search engines and accessible for all users.
+
+🗂️ Folder Structure
+text
+EasyFinCal/
+├── app.py                  # Flask backend: routes, calculator logic
 ├── templates/
-│   ├── index.html             # Homepage with calculator cards + articles
-│   ├── investment.html        # SIP calculator UI
-│   └── retirement.html        # Retirement calculator UI
-├── app.py                     # Flask routes + business logic
-├── requirements.txt           # Project dependencies
-├── .gitignore                 # Ignore venv, __pycache__, etc.
-└── README.md                  # GitHub documentation
-```
-
----
-
-## 🚀 Setup & Deployment
-
-### ✅ 1. Setup Virtual Environment
-
-```bash
+│   ├── index.html          # Homepage with calculator cards + articles
+│   ├── investment.html     # Monthly SIP Investment Calculator
+│   ├── retirement.html     # Retirement Corpus + SIP Planner
+│   ├── target_sip.html     # Target Corpus SIP Planner
+│   └── retirement_sip.html # Retirement SIP Planner
+├── static/
+│   ├── style.css           # Global styles: layout, dark mode, cards, forms
+│   ├── script.js           # Shared JS: charts, sliders, theme, interactivity
+│   └── logo.png            # (If applicable) Site logo
+└── requirements.txt        # Python dependencies (Flask, etc.)
+File/Folder Descriptions
+File/Folder	Purpose
+app.py	Main Flask application. Handles all routes, form submissions, and calculator logic.
+templates/	Jinja2 HTML templates rendered by Flask.
+index.html	Homepage: lists all calculators with icons, descriptions, and financial tips/articles.
+investment.html	SIP Investment Calculator: calculates future corpus for monthly SIP with step-up option.
+retirement.html	Retirement Corpus Calculator & SIP Planner: estimates required corpus and monthly SIP.
+target_sip.html	Target SIP Calculator: figures out the SIP needed to reach a specific goal in given time.
+retirement_sip.html	Retirement SIP Planner: combines corpus and SIP planning for retirement.
+static/	Static assets (CSS, JS, images, etc).
+style.css	Global custom styles: layout, dark mode, cards, forms, responsiveness.
+script.js	JavaScript for charts (Chart.js), slider syncing, theme toggle, and interactivity.
+requirements.txt	Python dependencies (Flask, gunicorn, etc.) for running the app locally or on deployment.
+🛠️ Getting Started
+1. Clone the Repository
+bash
+git clone https://github.com/yourusername/easyfincal.git
+cd easyfincal
+2. Set Up a Virtual Environment
+bash
 python -m venv venv
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass  # (Windows)
-.\venv\Scripts\Activate
-```
-
-### ✅ 2. Install Flask & Dependencies
-
-```bash
-pip install flask
-pip freeze > requirements.txt
-```
-
-### ✅ 3. Flask App Structure
-
-- `/` → Homepage  
-- `/investment` → SIP Calculator  
-- `/retirement` → Retirement Calculator  
-- Each route handles POST requests and passes calculated results to templates.
-
-### ✅ 4. Git & GitHub Workflow
-
-```bash
-git init
-git remote add origin https://github.com/akhilponna98/easyfincal.git
-git checkout -b dev
-git add .
-git commit -m "Initial project setup with Flask & calculators"
-git push -u origin dev
-```
-
-**📌 Tip**: Always work on a branch like `dev` and merge via Pull Requests to `main` to avoid merge conflicts.
-
-### ✅ 5. Deployment via Render
-
-- Go to [https://render.com](https://render.com)
-- Create **New Web Service**
-  - Runtime: **Python**
-  - Build Command: `pip install -r requirements.txt`
-  - Start Command: `python app.py`
-- Connect GitHub repo  
-- App auto-deploys on push.
-
-### ✅ 6. Custom Domain Setup
-
-- Bought domain: **easyfincal.com**
-- Linked it in Render → **Custom Domains**
-- Updated DNS (A and CNAME records) on provider like GoDaddy/Namecheap
-- Result: ✅ Live at `https://easyfincal.com`
-
----
-
-## 💡 Calculator Logic
-
-### 📊 SIP Calculator:
-- Monthly SIP with annual **step-up percentage**
-- Uses **compound interest** compounded monthly
-- Calculates:
-  - Total Invested
-  - Estimated Returns
-  - Final Corpus
-
-### 👵 Retirement Calculator:
-- Inflation-adjusted monthly expenses
-- Calculates future retirement corpus required
-- Uses current age, retirement age, expected life expectancy, inflation, and return rates
-
----
-
-## 🎨 Features Implemented
-
-- ✅ Responsive UI with **Bootstrap 5**
-- ✅ Dark mode toggle (remembers preference via `localStorage`)
-- ✅ Clear financial summaries and logic breakdown
-- ✅ Theme toggle icon switches (🌙/☀️)
-- ✅ Developer credit on homepage
-- ✅ SEO-friendly meta tags and clean layout
-
----
-
-## 📌 Git Best Practices
-
-1. Always create and work on a **feature branch**:
-   ```bash
-   git checkout -b feature/ui-update
-   ```
-2. After changes:
-   ```bash
-   git add .
-   git commit -m "Updated homepage layout with responsive grid"
-   git push origin feature/ui-update
-   ```
-3. Go to GitHub and create a **Pull Request → `main`**
-4. Once merged, Render auto-deploys latest version.
-
----
-
-## 📝 Future Improvements
-
-- 📄 Generate downloadable PDF report for results
-- 📊 Visual charts using Chart.js / Plotly
-- 🧮 Add calculators: EMI, FD, RD, NPS, Tax planning
-- 🔐 User authentication and dashboard (Flask-Login)
-- 🌐 PWA (Progressive Web App) with offline support
-
----
-
-## 📚 Commands Cheat Sheet
-
-```bash
-# Virtual Env
-python -m venv venv
-.env\Scriptsctivate
-
-# Flask Dev Run
+source venv/bin/activate      # On Windows: venv\Scripts\activate
+3. Install Dependencies
+bash
+pip install -r requirements.txt
+4. Run the App Locally
+bash
 python app.py
+Visit http://localhost:5000 in your browser.
 
-# Git Workflow
-git checkout -b dev
-git add .
-git commit -m "Commit message"
-git push origin dev
-```
+🌐 Deployment
+Free Hosting: Render.com (recommended)
 
----
+Steps:
 
-## 🔗 Live App & Repo
+Connect your GitHub repo
 
-- 🌐 Website: [https://easyfincal.com](https://easyfincal.com)
-- 🧑‍💻 GitHub Repo: [github.com/akhilponna98/easyfincal](https://github.com/akhilponna98/easyfincal)
+Set build command: pip install -r requirements.txt
+
+Set start command: python app.py
+
+Add custom domain if needed
+
+🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss your ideas.
+
+Use feature branches (feature/your-feature-name)
+
+Follow PEP8 for Python and standard HTML/CSS/JS best practices
+
+Keep code and documentation clean and readable
+
+📄 License
+This project is licensed under the MIT License.
+
+🙏 Credits
+Bootstrap
+
+Chart.js
+
+Flask
+
+Built and maintained by Akhil Ponna
+
+📬 Contact
+Email: your.email@example.com
+
+LinkedIn (add your link)
+
+GitHub
+
+Happy Planning! 🚀
+
+“Growing wealth is a long-term game. With patience, discipline, and consistent effort, anyone can build it.”
+— Akhil Ponna
